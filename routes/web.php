@@ -11,27 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/series', function () {
-    $series = [
-        'Grey\'s Anatomy',
-        'Lost',
-        'Agents of Shield'
-     ];
-
-    $html = "<ul>";
-
-    foreach($series as $serie) {
-        $html .= "<li>$serie</li>";
-    }
-
-    $html .= "</ul>";
-
-    return $html;
-});
+Route::get('/series', 'SeriesController@index');
+Route::get('/series/criar', 'SeriesController@create');
 
 Route::get('/info', function () {
     echo phpinfo();
