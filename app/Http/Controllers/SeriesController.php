@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-    public function index (Request $request) {
+    public function index () {
 
-        $series = [
-            'Grey\'s Anatomy',
-            'Lost',
-            'Agents of Shield'
-        ];
+        $series = Serie::query()
+            ->orderBy('nome')
+            ->get();
+
 
         return view('series.index',['series' => $series]);
     }
@@ -25,11 +24,11 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
-        $nome = $request->post('nome');
 
-        $serie = new Serie();
-        $serie->nome = $nome;
-        var_dump($serie->save());
+       $serie =  Serie::create($request->all());
+
+       return redirect('/series');
 
     }
+
 }
